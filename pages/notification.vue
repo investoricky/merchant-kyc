@@ -6,7 +6,7 @@
           <div class="d-flex justify-content-center">
             <v-img src="/checked.png" lazy-src="/checked.png" />
           </div>
-          <h1>Your KYC has been sumitted Successfully!!!</h1>
+          <h1>Your KYC has been submitted Successfully!!!</h1>
         </div>
       </div>
     </div>
