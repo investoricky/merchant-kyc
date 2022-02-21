@@ -7,6 +7,7 @@
             <v-img src="/checked.png" lazy-src="/checked.png" />
           </div>
           <h1>Your KYC has been submitted Successfully!!!</h1>
+          <p class="fw-bold">Go back to Mobile App.</p>
         </div>
       </div>
     </div>
@@ -33,6 +34,9 @@ export default {};
   }
   .notification_wrap h1 {
     font-size: 26px;
+  }
+  .notification_wrap p {
+    font-size: 13px;
   }
 }
 </style>
