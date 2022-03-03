@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="kyc_wrap">
-      
-        <h1 class="text-center text-white">KYC Form</h1>
+      <h1 class="text-center text-white">KYC Form</h1>
       <div class="kyc_form_info">
         <div class="form_wrap mt-3">
           <form action="" @submit.prevent="onSubmit()">
@@ -65,8 +64,10 @@
                 />
               </div> -->
               <div class="col-md-12">
-                <h5 class="text-center font-weight-bold">VALID MEANS OF IDENTIFICATION</h5>
-                <hr>
+                <h5 class="text-center font-weight-bold">
+                  VALID MEANS OF IDENTIFICATION
+                </h5>
+                <hr />
                 <h6 class="py-3">
                   Government Issued Document
                   <i>(eg NIN, Voters Card, International Passport)</i>
@@ -204,10 +205,10 @@ export default {
   padding: 0;
 }
 .kyc_wrap {
-  background: url('https://www.athletadesk.com/wp-content/uploads/2016/08/join-background.jpg');
+  background: url("https://www.athletadesk.com/wp-content/uploads/2016/08/join-background.jpg");
   background-color: rgba(0, 0, 0, 0.7);
   background-blend-mode: overlay;
-   padding: 2rem;
+  padding: 2rem;
 }
 .kyc_wrap h1 {
   font-size: 1.5rem;
