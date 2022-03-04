@@ -126,7 +126,8 @@
         
         <div class="icons">
           <ion-icon name="location-outline"></ion-icon>
-          <p class="" ><span v-if="merchant.address === null ">null</span> <span v-else>{{ merchant.address }}</span></p>
+          <p class="" ><span v-if="merchant.address === null ">null</span> <span v-else>{{ merchant.address }}, {{ merchant.city }}</span></p>
+          <p class="" ><span v-if="merchant.state === null ">null</span> <span v-else>{{ merchant.city }}, {{ merchant.state }} </span></p>
         </div>
         
         <!-- <h6>Documents</h6>
