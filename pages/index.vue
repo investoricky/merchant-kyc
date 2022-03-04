@@ -3,11 +3,17 @@
     <div class="kyc_wrap">
       <h1 class="text-center text-white">KYC Form</h1>
       <div class="kyc_form_info">
+        <div class="span">
+          <span
+            >important!! to ensure your KYC aprroved, please upload required
+            document in the appropriate field.</span
+          >
+        </div>
         <div class="form_wrap mt-3">
           <form action="" @submit.prevent="onSubmit()">
             <div class="row">
               <div class="col-md-6">
-                <div class="form-group mx-2 mt-2 py-3">
+                <div class="form-group mx-2 mt-4">
                   <v-text-field
                     label="Name"
                     v-model="kyc_info.name"
@@ -18,7 +24,7 @@
               </div>
 
               <div class="col-md-6">
-                <div class="form-group mx-2 mt-2 py-3">
+                <div class="form-group mx-2 mt-4">
                   <v-text-field
                     label="E-mail"
                     v-model="kyc_info.email"
@@ -26,6 +32,75 @@
                   />
                 </div>
               </div>
+              <!-- Address -->
+              <div class="col-md-6">
+                <div class="form-group mx-2">
+                  <v-text-field
+                    label="Address"
+                    v-model="kyc_info.address"
+                    placeholder="Enter Address"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mx-2">
+                  <v-text-field
+                    type="number"
+                    label="Phone Number"
+                    v-model="kyc_info.phone_number"
+                    required
+                  />
+                </div>
+              </div>
+              <!-- Country -->
+              <div class="col-md-6">
+                <div class="form-group mx-2">
+                  <label for="exampleFormControlSelect1" class="py-2"
+                    >State Of Origin</label
+                  >
+                  <select
+                    class="form-control option-class select"
+                    v-model="kyc_info.state"
+                    @change="getState()"
+                    id="selectState"
+                  >
+                    <option value="">---</option>
+                    <option
+                      v-for="state in states"
+                      :key="state.id"
+                      class="colour"
+                      :value="state.alias"
+                    >
+                      {{ state.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <!-- City -->
+              <div class="col-md-6">
+                <div class="form-group mx-2">
+                  <label for="exampleFormControlSelect1" class="py-2"
+                    >L.G.A</label
+                  >
+                  <select
+                    class="form-control option-class select"
+                    id="exampleFormControlSelect1"
+                    v-model="kyc_info.city"
+                  >
+                    <option value="">---</option>
+                    <option
+                      v-for="city of cities"
+                      :key="city.id"
+                      class="colour"
+                      :value="city.name"
+                    >
+                      {{ city.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
               <div class="col-md-6">
                 <div class="form-group">
                   <v-file-input
@@ -54,15 +129,6 @@
                   @change="upload_relevant_doc()"
                 />
               </div>
-              <!-- <div class="col-md-6">
-                <v-file-input
-                  multiple
-                  placeholder="Upload Relevant Business Document"
-                  prepend-icon="mdi-camera"
-                  label="Business Document(Revenue Receipt)"
-                  @change="upload_revenue_receipt()"
-                />
-              </div> -->
               <div class="col-md-12">
                 <h5 class="text-center font-weight-bold">
                   VALID MEANS OF IDENTIFICATION
@@ -85,12 +151,7 @@
                 </div>
               </div>
               <div class="submit_button_wrapper">
-                <v-btn
-                  class="success bg-success apply-to-join-btn"
-                  type="submit"
-                  :loading="loading"
-                  >Submit</v-btn
-                >
+                <v-btn type="submit" :loading="loading">Submit</v-btn>
               </div>
             </div>
           </form>
@@ -109,45 +170,36 @@ export default {
       kyc_info: {
         name: "",
         email: "",
+        address: "",
         reference_number: "",
         passport_photo: "",
         shop_photo: "",
         valid_id: "",
         relevant_document: "",
+        phone_number: "",
+        state: "",
+        city: "",
       },
       document: [],
+      states: {},
+      selState: "",
+      cities: "",
+      stateUrl: "https://locus.fkkas.com/api/states",
     };
   },
   methods: {
-    // async get_kyc() {
-    //   try {
-    //     this.loading = true;
-    //     let payload = {
-    //       name: this.kyc_info.name,
-    //       email: this.kyc_info.email,
-    //       // reference_number = this.kyc_info.reference_number,
-    //       // passport_photo: this.kyc_info.passport_photo,
-    //       // valid_id: this.kyc_info.valid_id,
-    //       // relevant_document: this.kyc_info.relevant_document,
-    //       // shop_photo: this.kyc_info.shop_photo,
-    //       documents: this.document,
-    //     };
-    //     const response = await this.$axios.post("/api/kyc/create", payload);
-    //     // console.log(this.kyc_info);
-
-    //     console.log(response);
-    //     this.loading = false;
-    //     this.$router.push("/notification");
-    //   } catch (error) {
-    //     console.log(error.response);
-    //     this.loading = false;
-    //   }
-    // },
+    getState() {
+      var stateOptions = document.getElementById("selectState");
+      var selOption = stateOptions.options[stateOptions.selectedIndex].value;
+      this.selState = selOption;
+      this.get_cities();
+    },
     get_kyc() {
       this.loading = true;
       const formData = new FormData();
       formData.append("name", this.kyc_info.name);
       formData.append("email", this.kyc_info.email);
+      formData.append("phone_number", this.kyc_info.phone_number);
       formData.append("passport_photo", this.kyc_info.passport_photo);
       formData.append("shop_photo", this.kyc_info.shop_photo);
       formData.append("valid_id", this.kyc_info.valid_id);
@@ -165,6 +217,22 @@ export default {
           console.log(error);
           this.loading = false;
         });
+    },
+
+    async get_states() {
+      try {
+        const response = await this.$axios.get(this.stateUrl);
+        this.states = response.data.data;
+        console.log(this.states);
+      } catch (error) {
+        console.log(error.response);
+      }
+    },
+    async get_cities() {
+      let res = await this.$axios.get(
+        `https://locus.fkkas.com/api/regions/${this.selState}`
+      );
+      this.cities = res.data.data;
     },
     upload_passport_photo() {
       var input = event.target;
@@ -194,6 +262,9 @@ export default {
     onSubmit() {
       this.get_kyc();
     },
+  },
+  mounted() {
+    this.get_states();
   },
 };
 </script>
@@ -228,9 +299,10 @@ export default {
   font-size: 30px;
   margin-top: 20px;
 }
-/* .kyc_form_info span {
-  font-size: 10px !important;
-} */
+.kyc_form_info .span span {
+  font-size: 10px;
+  color: #f00;
+}
 .kyc_form_info .form-control {
   height: 50px;
 }
@@ -238,10 +310,18 @@ export default {
   width: 100%;
   padding: 20px;
 }
+.kyc_form_info .option-class {
+  box-shadow: none;
+}
+.kyc_form_info .option-class:focus-within {
+  border-color: #30303025;
+}
 .submit_button_wrapper .v-btn {
   width: 100%;
   height: 40px;
   box-shadow: none;
+  background-color: green !important;
+  color: #fff !important;
 }
 .v-file-input label,
 .v-text-field label {
@@ -249,10 +329,25 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .kyc_wrap {
+    padding: 15px;
+  }
   .kyc_form_info {
     width: 100%;
     margin: 0;
     padding: 20px;
+  }
+  .kyc_form_info .form-group {
+    font-size: 14px;
+  }
+  .kyc_form_info .col-md-6 {
+    padding: 5px !important;
+  }
+  .kyc_form_info .mt-4 {
+    margin-top: 0 !important;
+  }
+  .kyc_form_info h6 {
+    font-size: 13px;
   }
 }
 </style>
