@@ -76,6 +76,15 @@
                       required
                     />
                   </div>
+                  
+                  <div class="form-group mt-3">
+                    <v-text-field
+                      label="Address"
+                      v-model="kyc_info.address"
+                      placeholder="Enter Valid Business Address"
+                      required
+                    />
+                  </div>
 
                   <div class="submit_button_wrapper mt-4">
                     <v-btn
@@ -107,6 +116,7 @@ export default {
         state: "",
         city: "",
         phone_number: "",
+        address: '',
       },
       msg: "",
       states: [],

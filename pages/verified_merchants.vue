@@ -2,6 +2,18 @@
   <div>
     <div class="verified_merchant_wrap">
       <div class="verification_content">
+         <div class="form-group w-50 search-area mx-auto d-flex align-items-center mt-3">
+                    <v-text-field
+                      label="Search"
+                      v-model="search"
+                      placeholder="Search Merchant by City"
+                      required
+                      @keyup="getKYC(search)"
+                    />
+                    <button class="btn__search" @click="getKYC(search)">
+                      <ion-icon name="search"></ion-icon>
+                    </button>
+            </div>
         <div class="text-center py-3">
           <h1 class="font-weight-bold">SZC Verified Merchants</h1>
           <hr style="width:20%; margin: 0 auto">
@@ -20,6 +32,9 @@
               </tr>
             </thead>
             <tbody>
+              <!-- <tr v-show="no_result">
+                No results Found
+              </tr> -->
               <tr class="mt-2" v-for="item in dataArr" :key="item.id" @click="viewMore(item)">
                 <td>
                   <span v-for="doc in item.documents" :key="doc.id"> 
@@ -30,7 +45,7 @@
                 <td> {{ item.name }} </td>
                 <td> {{ item.email }} </td>
                 <td>  <span v-if="item.phone_number === null ">null</span> <span v-else> {{ item.phone_number }} </span>  </td>
-                <td> <span v-if="item.state === null ">null</span> <span v-else>{{ item.city }}, {{ item.state }}</span> </td>
+                <td> <span v-if="item.address === null "> null</span> <span v-else>{{ item.address }}</span></td>
               </tr>
             </tbody>
             </template>
@@ -111,7 +126,7 @@
         
         <div class="icons">
           <ion-icon name="location-outline"></ion-icon>
-          <p class="" ><span v-if="merchant.state === null ">null</span> <span v-else>{{ merchant.city }}, {{ merchant.state }}</span></p>
+          <p class="" ><span v-if="merchant.address === null ">null</span> <span v-else>{{ merchant.address }}</span></p>
         </div>
         
         <!-- <h6>Documents</h6>
@@ -146,19 +161,30 @@ export default {
       dataObj: {},
       documents: [],
       merchant: {},
+      search: '',
+      value: null,
+      no_result: false,
     };
   },
   methods: {
+    
     async getKYC(page = 1) {
       this.$axios
         .get("api/kyc", {
           params: {
             page,
+            search: this.search
           },
         })
         .then((res) => {
           this.dataArr = res.data.kyc.data;
           this.dataObj = res.data.kyc;
+           if(this.dataArr.length === 0){
+                    this.no_result = true
+                }
+                else{
+                    this.no_result = false
+                }
           console.log(this.dataArr);
         })
         .catch((error) => {
@@ -194,7 +220,7 @@ export default {
   background-color: #f8f7ff;
   /* padding: 100px;  */
   /* border-radius: 10px; */
-  padding: 100px;
+  padding: 50px 100px;
 }
 .verification_content .v-data-table--fixed-header > .v-data-table__wrapper {
   background-color: #f8f7ff;
@@ -310,9 +336,19 @@ export default {
   /* margin-top: -1.3rem; */
   color: #0c680c;
 }
+.btn__search {
+  color: #0c680c;
+  background: #0c680c31;
+  border: 1px solid #0c680c31;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @media (max-width: 768px) {
   .verification_content {
-    padding: 1.5rem;
+    padding:0.6rem 1.5rem;
   }
 
   .verification_content h1 {
@@ -335,6 +371,9 @@ export default {
   /* border-radius: 50%; */
   object-fit: cover;
   object-position: top;
+}
+.verification_content .search-area{
+  width: 100% !important;
 }
 }
 </style>
