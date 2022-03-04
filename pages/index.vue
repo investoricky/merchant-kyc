@@ -5,8 +5,8 @@
       <div class="kyc_form_info">
         <div class="span">
           <span
-            >important!! to ensure your KYC aprroved, please upload required
-            document in the appropriate field.</span
+            ><b>IMPORTANT:</b> To ensure your KYC is aprroved, please upload the
+            required documents in the appropriate fields.</span
           >
         </div>
         <div class="form_wrap mt-3">
@@ -281,6 +281,11 @@ export default {
   background-blend-mode: overlay;
   padding: 2rem;
 }
+.kyc_form_info input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .kyc_wrap h1 {
   font-size: 1.5rem;
   font-weight: bold;
@@ -300,7 +305,7 @@ export default {
   margin-top: 20px;
 }
 .kyc_form_info .span span {
-  font-size: 10px;
+  font-size: 12px;
   color: #f00;
 }
 .kyc_form_info .form-control {
