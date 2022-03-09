@@ -213,7 +213,7 @@ export default {
         .then((res) => {
           this.$router.push("/notification");
           this.kyc_info = {};
-          console.log(res.data);
+          // console.log(res.data);
           this.loading = false;
         })
         .catch((error) => {
@@ -226,7 +226,7 @@ export default {
       try {
         const response = await this.$axios.get(this.stateUrl);
         this.states = response.data.data;
-        console.log(this.states);
+        // console.log(this.states);
       } catch (error) {
         console.log(error.response);
       }
@@ -241,18 +241,18 @@ export default {
       var input = event.target;
       this.kyc_info.passport_photo = input.files[0];
       this.document.push(this.kyc_info.passport_photo);
-      console.log(this.kyc_info.passport_photo);
+      // console.log(this.kyc_info.passport_photo);
     },
     upload_shop_photo() {
       var input = event.target;
       this.kyc_info.shop_photo = input.files[0];
       this.document.push(this.kyc_info.shop_photo);
-      console.log(this.kyc_info.shop_photo);
+      // console.log(this.kyc_info.shop_photo);
     },
     upload_relevant_doc() {
       var input = event.target;
       this.kyc_info.relevant_document = input.files[0];
-      console.log(this.kyc_info.relevant_document);
+      // console.log(this.kyc_info.relevant_document);
       this.document.push(this.kyc_info.relevant_document);
     },
 
@@ -260,7 +260,7 @@ export default {
       var input = event.target;
       this.kyc_info.valid_id = input.files[0];
       this.document.push(this.kyc_info.valid_id);
-      console.log(this.kyc_info.valid_id);
+      // console.log(this.kyc_info.valid_id);
     },
     onSubmit() {
       this.get_kyc();
