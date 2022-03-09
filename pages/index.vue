@@ -65,7 +65,7 @@
                     @change="getState()"
                     id="selectState"
                   >
-                    <option value="">---</option>
+                    <option>---</option>
                     <option
                       v-for="state in states"
                       :key="state.id"
@@ -88,7 +88,7 @@
                     id="exampleFormControlSelect1"
                     v-model="kyc_info.city"
                   >
-                    <option value="">---</option>
+                    <option>---</option>
                     <option
                       v-for="city of cities"
                       :key="city.id"
@@ -203,6 +203,9 @@ export default {
       formData.append("passport_photo", this.kyc_info.passport_photo);
       formData.append("shop_photo", this.kyc_info.shop_photo);
       formData.append("valid_id", this.kyc_info.valid_id);
+      formData.append("state", this.kyc_info.state);
+      formData.append("city", this.kyc_info.city);
+      formData.append("address", this.kyc_info.address);
       formData.append("relevant_document", this.kyc_info.relevant_document);
       formData.append("_method", "POST");
       this.$axios
