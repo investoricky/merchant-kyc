@@ -15,48 +15,48 @@ export default {
             { name: 'format-detection', content: 'telephone=no' }
         ],
         link: [
-            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            { rel: 'icon', type: 'image/x-icon', href: '/male_avatar.png' },
             { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" },
             { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" },
         ],
         script: [{
-                src: "https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js",
-                type: "module"
-            },
-            {
-                src: "https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js",
-                type: "nomodule"
-            },
+            src: "https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js",
+            type: "module"
+        },
+        {
+            src: "https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js",
+            type: "nomodule"
+        },
 
-            {
-                src: "https://code.jquery.com/jquery-3.6.0.js",
-                type: "text/javascript"
-            },
-            {
-                src: "https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js",
-                type: "text/javascript"
-            },
-            {
-                src: "https://code.jquery.com/jquery-3.5.1.slim.min.js",
-                type: "text/javascript"
-            },
-            {
-                src: "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js",
-                type: "text/javascript"
-            },
-            {
-                src: "https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js",
-                type: "text/javascript"
-            },
+        {
+            src: "https://code.jquery.com/jquery-3.6.0.js",
+            type: "text/javascript"
+        },
+        {
+            src: "https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js",
+            type: "text/javascript"
+        },
+        {
+            src: "https://code.jquery.com/jquery-3.5.1.slim.min.js",
+            type: "text/javascript"
+        },
+        {
+            src: "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js",
+            type: "text/javascript"
+        },
+        {
+            src: "https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js",
+            type: "text/javascript"
+        },
 
-            {
-                src: "https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js",
-                type: "text/javascript"
-            },
-            {
-                src: "https://cdn.jsdelivr.net/npm/typed.js@2.0.12",
-                type: "text/javascript"
-            },
+        {
+            src: "https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js",
+            type: "text/javascript"
+        },
+        {
+            src: "https://cdn.jsdelivr.net/npm/typed.js@2.0.12",
+            type: "text/javascript"
+        },
 
 
             // {
@@ -81,7 +81,7 @@ export default {
 
         src: "~/plugins/vue-notification.js",
         ssr: false
-    }, ],
+    },],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,

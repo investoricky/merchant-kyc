@@ -338,7 +338,7 @@ input::-webkit-inner-spin-button {
 
 @media (max-width: 768px) {
   .kyc_wrap {
-    padding: 15px;
+    padding: 10px;
   }
   .kyc_form_info {
     width: 100%;
