@@ -226,7 +226,7 @@ export default {
       try {
         const response = await this.$axios.get(this.stateUrl);
         this.states = response.data.data;
-        // console.log(this.states);
+        console.log(this.states);
       } catch (error) {
         console.log(error.response);
       }
