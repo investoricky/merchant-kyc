@@ -246,7 +246,7 @@ export default {
           } else {
             this.no_result = false;
           }
-          console.log(this.dataArr);
+          // console.log(this.dataArr);
         })
         .catch((error) => {
           console.log(error);
@@ -263,7 +263,7 @@ export default {
           `${this.baseurl}api/kyc/${new_id}/view`
         );
         this.merchant_card = !this.merchant_card;
-        console.log(res.data.kyc);
+        // console.log(res.data.kyc);
         this.merchant = res.data.kyc;
       } catch (error) {
         console.log(error);
