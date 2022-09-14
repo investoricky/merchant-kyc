@@ -57,12 +57,13 @@
               <div class="col-md-6">
                 <div class="form-group mx-2">
                   <label for="exampleFormControlSelect1" class="py-2"
-                    >State Of Origin</label
+                    >State Of Origin </label
                   >
+                  
                   <select
                     class="form-control option-class select"
                     v-model="kyc_info.state"
-                    @change="getState()"
+                    @change="getState(kyc_info.state)"
                     id="selectState"
                   >
                     <option>---</option>
@@ -70,9 +71,9 @@
                       v-for="state in states"
                       :key="state.id"
                       class="colour"
-                      :value="state.alias"
+                      :value="state.id"
                     >
-                      {{ state.name }}
+                      {{ state.name }} 
                     </option>
                   </select>
                 </div>
@@ -82,7 +83,7 @@
                 <div class="form-group mx-2">
                   <label for="exampleFormControlSelect1" class="py-2"
                     >L.G.A</label
-                  >
+                  > 
                   <select
                     class="form-control option-class select"
                     id="exampleFormControlSelect1"
@@ -90,12 +91,12 @@
                   >
                     <option>---</option>
                     <option
-                      v-for="city of cities"
-                      :key="city.id"
+                      v-for="city of cities.lgas"
+                      :key="city"
                       class="colour"
-                      :value="city.name"
+                      :value="city"
                     >
-                      {{ city.name }}
+                      {{ city }}
                     </option>
                   </select>
                 </div>
@@ -177,22 +178,28 @@ export default {
         valid_id: "",
         relevant_document: "",
         phone_number: "",
-        state: "",
+        state: 1,
         city: "",
       },
       document: [],
       states: {},
       selState: "",
       cities: "",
-      stateUrl: "https://locus.fkkas.com/api/states",
+      stateUrl: "https://api.verify.szcmerchant.com/api/states",
     };
   },
   methods: {
-    getState() {
-      var stateOptions = document.getElementById("selectState");
-      var selOption = stateOptions.options[stateOptions.selectedIndex].value;
-      this.selState = selOption;
-      this.get_cities();
+    getState(state) {
+      console.log(state);
+      console.log(this.states);
+
+      let selectedState = this.states.find((item) => item.id == state)
+      console.log(selectedState);
+
+      this.cities = selectedState
+      // var stateOptions = document.getElementById("selectState");
+      // var selOption = stateOptions.options[stateOptions.selectedIndex].value;
+      // this.selState = selOption;     
     },
     get_kyc() {
       this.loading = true;
@@ -225,18 +232,23 @@ export default {
     async get_states() {
       try {
         const response = await this.$axios.get(this.stateUrl);
-        this.states = response.data.data;
+        this.states = response.data;
         console.log(this.states);
       } catch (error) {
         console.log(error.response);
       }
     },
-    async get_cities() {
-      let res = await this.$axios.get(
-        `https://locus.fkkas.com/api/regions/${this.selState}`
-      );
-      this.cities = res.data.data;
-    },
+    // async get_city(state) {
+    //   let selectedState = state.name
+
+    //   console.log(selectedState);
+    // },
+    // async get_cities() {
+    //   let res = await this.$axios.get(
+    //     `https://api.verify.szcmerchant.com/api/states`
+    //   );
+    //   this.cities = res.data;
+    // },
     upload_passport_photo() {
       var input = event.target;
       this.kyc_info.passport_photo = input.files[0];
@@ -268,6 +280,7 @@ export default {
   },
   mounted() {
     this.get_states();
+    // this.get_city()
   },
 };
 </script>
